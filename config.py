@@ -1,12 +1,9 @@
+
 import re
 from os import getenv
 
 from dotenv import load_dotenv
 from pyrogram import filters
-from database import get_db_general_rtb
-from utils import get_restarted
-
-super_sudoers = [1400467850]
 
 load_dotenv()
 
@@ -18,15 +15,15 @@ API_HASH = getenv("API_HASH", "6f3f84d0b392900e09b0aed186470890")
 BOT_TOKEN = getenv("BOT_TOKEN")
 
 # Get your mongo url from cloud.mongodb.com
-MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://proceed58:proceed58@cluster0.p5s9ym5.mongodb.net/?retryWrites=true&w=majority")
+MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://devfraon:devfraon@devfraon.sg3sijf.mongodb.net/?retryWrites=true&w=majority")
 
-DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 2000))
+DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 20000))
 
 # Chat id of a group for logging bot's activities
 LOGGER_ID = int(getenv("LOGGER_ID", None))
 
 # Get this value from @FallenxBot on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID", 6130127477))
+OWNER_ID = int(getenv("OWNER_ID", 1400467850))
 
 ## Fill these variables if you're deploying on heroku.
 # Your heroku app name
@@ -36,14 +33,15 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
-    "https://github.com/me2wdo/medo.git",
+    "https://github.com/kingookk/ko",
 )
-UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
+UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
 GIT_TOKEN = getenv(
     "GIT_TOKEN", None
 )  # Fill this variable if your upstream repository is private
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/va_source")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/source_av")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/QS_TQ")
 
 # Set this to True if you want the assistant to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
@@ -52,7 +50,6 @@ AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
 # Get this credentials from https://developer.spotify.com/dashboard
 SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", None)
 SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", None)
-
 
 # Maximum limit for fetching playlist's track from youtube, spotify, apple links.
 PLAYLIST_FETCH_LIMIT = int(getenv("PLAYLIST_FETCH_LIMIT", 25))
@@ -71,13 +68,6 @@ STRING3 = getenv("STRING_SESSION3", None)
 STRING4 = getenv("STRING_SESSION4", None)
 STRING5 = getenv("STRING_SESSION5", None)
 
-# API keys
-TENOR_API_KEY = "2MAL8NKBOO01"
-
-# Bot version, do not touch this
-with open("version.txt") as f:
-    version = f.read().strip()
-
 
 BANNED_USERS = filters.user()
 adminlist = {}
@@ -85,30 +75,24 @@ lyrical = {}
 votemode = {}
 autoclean = []
 confirmer = {}
-disabled_plugins = []
-get_bot_information = []
-sudoers = []
-backup_file = []
-developer = []
-command = ["/"]
 
 
 START_IMG_URL = getenv(
-    "START_IMG_URL", "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
+    "START_IMG_URL", "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
 )
 PING_IMG_URL = getenv(
-    "PING_IMG_URL", "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
+    "PING_IMG_URL", "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
 )
-PLAYLIST_IMG_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-STATS_IMG_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-TELEGRAM_AUDIO_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-TELEGRAM_VIDEO_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-STREAM_IMG_URL ="https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-SOUNCLOUD_IMG_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-YOUTUBE_IMG_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-SPOTIFY_ARTIST_IMG_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-SPOTIFY_ALBUM_IMG_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
-SPOTIFY_PLAYLIST_IMG_URL = "https://telegra.ph/file/e4a34cbe57d14da30235b.jpg"
+PLAYLIST_IMG_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+STATS_IMG_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+TELEGRAM_AUDIO_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+TELEGRAM_VIDEO_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+STREAM_IMG_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+SOUNCLOUD_IMG_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+YOUTUBE_IMG_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+SPOTIFY_ARTIST_IMG_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+SPOTIFY_ALBUM_IMG_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
+SPOTIFY_PLAYLIST_IMG_URL = "https://telegra.ph/file/63dd22699c807982ad32e.jpg"
 
 
 def time_to_seconds(time):
@@ -123,4 +107,10 @@ if SUPPORT_CHANNEL:
     if not re.match("(?:http|https)://", SUPPORT_CHANNEL):
         raise SystemExit(
             "[ERROR] - Your SUPPORT_CHANNEL url is wrong. Please ensure that it starts with https://"
+        )
+
+if SUPPORT_CHAT:
+    if not re.match("(?:http|https)://", SUPPORT_CHAT):
+        raise SystemExit(
+            "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
         )
