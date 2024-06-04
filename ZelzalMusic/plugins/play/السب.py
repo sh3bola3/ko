@@ -1,6 +1,6 @@
 from pyrogram import Client
 from pyrogram import filters
-from AarohiX import app
+from ZelzalMusic import app
 
 #SouRce Teto
 @app.on_message(filters.text)
