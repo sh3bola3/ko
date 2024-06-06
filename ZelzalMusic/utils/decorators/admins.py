@@ -20,7 +20,7 @@ from strings import get_string
 from ..formatters import int_to_alpha
 
 
-def AdminRightsCheckk(mystic):
+def AdminRightsCheck(mystic):
     async def wrapper(client, message):
         if await is_maintenance() is False:
             if message.from_user.id not in SUDOERS:
@@ -39,6 +39,18 @@ def AdminRightsCheckk(mystic):
             _ = get_string(language)
         except:
             _ = get_string("en")
+        if message.sender_chat:
+            upl = InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="ʜᴏᴡ ᴛᴏ ғɪx ?",
+                            callback_data="ZelzalymousAdmin",
+                        ),
+                    ]
+                ]
+            )
+            return await message.reply_text(_["general_3"], reply_markup=upl)
         if message.command[0][0] == "c":
             chat_id = await get_cmode(message.chat.id)
             if chat_id is None:
@@ -54,6 +66,50 @@ def AdminRightsCheckk(mystic):
         is_non_admin = await is_nonadmin_chat(message.chat.id)
         if not is_non_admin:
             if message.from_user.id not in SUDOERS:
+                admins = adminlist.get(message.chat.id)
+                if not admins:
+                    return await message.reply_text(_["admin_13"])
+                else:
+                    if message.from_user.id not in admins:
+                        if await is_skipmode(message.chat.id):
+                            upvote = await get_upvote_count(chat_id)
+                            text = f"""<b>ᴀᴅᴍɪɴ ʀɪɢʜᴛs ɴᴇᴇᴅᴇᴅ</b>
+
+ʀᴇғʀᴇsʜ ᴀᴅᴍɪɴ ᴄᴀᴄʜᴇ ᴠɪᴀ : /reload
+
+» {upvote} ᴠᴏᴛᴇs ɴᴇᴇᴅᴇᴅ ғᴏʀ ᴘᴇʀғᴏʀᴍɪɴɢ ᴛʜɪs ᴀᴄᴛɪᴏɴ."""
+
+                            command = message.command[0]
+                            if command[0] == "c":
+                                command = command[1:]
+                            if command == "speed":
+                                return await message.reply_text(_["admin_14"])
+                            MODE = command.title()
+                            upl = InlineKeyboardMarkup(
+                                [
+                                    [
+                                        InlineKeyboardButton(
+                                            text="ᴠᴏᴛᴇ",
+                                            callback_data=f"ADMIN  UpVote|{chat_id}_{MODE}",
+                                        ),
+                                    ]
+                                ]
+                            )
+                            if chat_id not in confirmer:
+                                confirmer[chat_id] = {}
+                            try:
+                                vidid = db[chat_id][0]["vidid"]
+                                file = db[chat_id][0]["file"]
+                            except:
+                                return await message.reply_text(_["admin_14"])
+                            senn = await message.reply_text(text, reply_markup=upl)
+                            confirmer[chat_id][senn.id] = {
+                                "vidid": vidid,
+                                "file": file,
+                            }
+                            return
+                        else:
+                            return await message.reply_text(_["admin_14"])
 
         return await mystic(client, message, _, chat_id)
 
