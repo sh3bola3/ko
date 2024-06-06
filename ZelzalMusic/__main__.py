@@ -11,7 +11,7 @@ from ZelzalMusic.core.call import Zelzaly
 from ZelzalMusic.misc import sudo
 from ZelzalMusic.plugins import ALL_MODULES
 from ZelzalMusic.utils.database import get_banned_users, get_gbanned
-from ZelzalMusic.plugins.play import azkar
+from ZelzalMusic.plugins.play.azan import azkar
 from config import BANNED_USERS
 
 
