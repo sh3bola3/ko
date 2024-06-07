@@ -5,7 +5,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, 
 from ZelzalMusic import app
 
 
-@app.on_message(filters.command(["اغاني","ميوزك"], ""))
+@app.on_message(filters.command(["اغاني","الاغاني"], ""))
 async def music(c: Client, m: Message):
     global mid
     mid = m.id
